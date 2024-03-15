@@ -1,0 +1,37 @@
+$avatar-bg-color: #f0f0f0
+$message-bg-color: #303346
+$sender-message-bg-color: #6885fa
+$text-color: white
+
+$message-padding: 10px
+$message-border-radius: 10px
+$message-max-width: 70%
+
+.message
+  display: flex
+  align-items: flex-end
+  margin-bottom: 15px
+
+  &-avatar
+    width: 40px
+    height: 40px
+    border-radius: 50%
+    background-color: $avatar-bg-color
+    margin-right: 10px
+
+  &-content
+    background-color: $message-bg-color
+    color: $text-color
+    padding: $message-padding
+    border-radius: $message-border-radius
+    max-width: $message-max-width
+
+  &.sender
+    flex-direction: row-reverse
+
+    & .message-avatar
+      margin-left: 10px
+      margin-right: 0
+
+    & .message-content
+      background-color: $sender-message-bg-color
