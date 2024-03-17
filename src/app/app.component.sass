@@ -1,6 +1,5 @@
 body
-  font-family: Arial, sans-serif
-  //background-color: var(--dark-bg)
+  font-family: "FiraCode Nerd Font", serif
 
 .container-fluid
   height: 100vh
@@ -18,17 +17,20 @@ body
     padding: 9px 20px
 
     .bi-plus-circle-fill
-      color: var(--blue-bg)
+      color: var(--highlight-bg)
 
     .search-bar
       background: var(--dark-bg)
       color: white
+      border: none
       padding: 15px
       border-radius: 10px
       margin: 10px auto
       cursor: pointer
       transition: background-color 0.3s
 
+      &::placeholder
+        color: white
 
 .list-container
   padding: 20px
@@ -40,17 +42,15 @@ body
     padding: 15px
     border: none
     border-radius: 10px
-    margin-bottom: 10px
+    margin-bottom: 5px
     cursor: pointer
     transition: background-color 0.3ms
 
     &:hover, &.active
-      background-color: var(--blue-bg)
+      background-color: var(--dark-bg)
 
     &:focus
       outline: none
-
-
 
 
 .main-content
