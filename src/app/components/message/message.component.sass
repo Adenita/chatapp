@@ -1,0 +1,34 @@
+$avatar-bg-color: #f0f0f0
+
+$message-border-radius: 25px
+$message-max-width: 70%
+
+.message
+  display: flex
+  align-items: flex-end
+  margin-bottom: 15px
+
+  &-avatar
+    width: 55px
+    height: 55px
+    border-radius: 50%
+    background-color: $avatar-bg-color
+    margin-right: 10px
+
+  &-content
+    background-color: rgba(0, 0, 0, 0.14)
+    color: var(--semi-dark-bg)
+    padding: 13px 25px
+    border-radius: $message-border-radius
+    max-width: $message-max-width
+
+  &.sender
+    flex-direction: row-reverse
+
+    & .message-avatar
+      margin-left: 10px
+      margin-right: 0
+
+    & .message-content
+      background-color: var(--highlight-bg)
+      color: white
