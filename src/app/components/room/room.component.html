@@ -1,0 +1,37 @@
+<div class="header border-bottom pb-4">
+  <div class="row align-items-center">
+    <div class="col-auto">
+      <div class="room-avatar"></div>
+    </div>
+    <div class="col">
+      <h3 class="chat-name">{{ roomTransport.name }}</h3>
+    </div>
+    <div class="col-auto">
+      <div><i class="bi bi-info-circle-fill"></i></div>
+    </div>
+  </div>
+</div>
+
+<div class="chat-container">
+  <div class="messages-container">
+    <div *ngFor="let message of messages$ | async  " class="message">
+      <app-message [content]="message.content" [isSender]="message.userTransport.id == 1"></app-message>
+    </div>
+  </div>
+</div>
+<div class="footer border-top">
+  <div class="input-container">
+    <div class="row  align-items-center">
+      <div class="col px-0">
+        <input type="text" [(ngModel)]="messageInput" class="input-field" placeholder="Type your message...">
+      </div>
+      <div class="col-auto">
+        <button class="send-button" (click)="sendMessage()">
+          <i class="bi bi-arrow-right-circle-fill fs-2"> </i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
