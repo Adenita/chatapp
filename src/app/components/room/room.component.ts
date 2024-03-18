@@ -2,10 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {BehaviorSubject, map, Subject, takeUntil} from "rxjs";
 import {MessageListTransport, MessageTransport} from "../../shared/models/message";
 import {RoomService} from "../../core/services/http/room.service";
-import {MessageService} from "../../core/services/http/message.service";
 import {UserService} from "../../core/services/http/user.service";
 import {UserTransport} from "../../shared/models/user";
 import {RoomTransport} from "../../shared/models/room";
+import {SocketIOService} from "../../core/services/socket-i-o.service";
 
 @Component({
   selector: 'app-room',
@@ -22,8 +22,8 @@ export class RoomComponent implements OnInit {
 
   constructor(
     private roomService: RoomService,
-    private messageService: MessageService,
-    private userService: UserService
+    private userService: UserService,
+    private socketIOService: SocketIOService
   ) {
     this.messages$ = new BehaviorSubject<MessageTransport[]>([]);
   }
@@ -32,6 +32,15 @@ export class RoomComponent implements OnInit {
     this.getRoomMessages(1);
     this.getRoom(1)
       .then(() => this.getUser(1))
+      .then(() => {
+        this.socketIOService.connectToSocket(this.roomTransport.id + "")
+        this.socketIOService.receiveMessages(1).subscribe({
+          next: (message) => {
+            console.log("received message: ", message)
+            this.messages$.next([message, ...this.messages$.getValue()]);
+          }
+        })
+      })
   }
 
   getRoomMessages(roomId: number) {
@@ -41,25 +50,10 @@ export class RoomComponent implements OnInit {
         takeUntil(this.destroyed$))
       .subscribe({
       next: (messageListTransport: MessageListTransport) => {
-        console.log(messageListTransport)
         this.messages$.next(messageListTransport.messageTransports);
       },
       error: (err) => console.error('Error fetching room messages', err),
     });
-  }
-
-  postMessage(userTransport: UserTransport, roomTransport: RoomTransport, content: string) {
-    const messageTransport = {userTransport, roomTransport, content} as MessageTransport;
-    this.messageService.post(messageTransport)
-      .pipe(takeUntil(this.destroyed$))
-      .subscribe({
-        next: (messageTransport: MessageTransport) => {
-          console.log(messageTransport)
-          this.messageInput = '';
-          this.messages$.next([messageTransport, ...this.messages$.getValue()]);
-        },
-        error: (err) => console.error('Error fetching room messages', err),
-      });
   }
 
   getUser(userId: number) {
@@ -80,7 +74,6 @@ export class RoomComponent implements OnInit {
         .pipe(takeUntil(this.destroyed$))
         .subscribe({
           next: (roomTransport: RoomTransport) => {
-            console.log(roomTransport)
             this.roomTransport = roomTransport;
             resolve();
           },
@@ -94,7 +87,14 @@ export class RoomComponent implements OnInit {
   }
 
   sendMessage() {
-    this.postMessage(this.userTransport, this.roomTransport, this.messageInput);
+    const messageTransport = {
+      userTransport: this.userTransport,
+      roomTransport: this.roomTransport,
+      content: this.messageInput
+    } as MessageTransport;
+
+    this.socketIOService.sendMessage(messageTransport);
+    this.messageInput = '';
   }
 
 }
