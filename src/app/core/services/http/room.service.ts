@@ -4,6 +4,7 @@ import {HttpClient} from "@angular/common/http";
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs";
 import {MessageListTransport} from "../../../shared/models/message";
+import {UserListTransport} from "../../../shared/models/user";
 
 @Injectable({
   providedIn: 'root',
@@ -16,5 +17,9 @@ export class RoomService extends DataService<RoomTransport, RoomListTransport> {
 
   getRoomMessages(roomId: number): Observable<MessageListTransport> {
     return this.httpClient.get<MessageListTransport>(`${this.url}/${this.apiUrl}/${roomId}/messages`);
+  }
+
+  getRoomUsers(roomId: number): Observable<UserListTransport> {
+    return this.httpClient.get<UserListTransport>(`${this.url}/${this.apiUrl}/${roomId}/users`);
   }
 }
