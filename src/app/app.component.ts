@@ -14,6 +14,8 @@ import {UserService} from "./core/services/http/user.service";
 export class AppComponent implements OnInit {
   rooms$: BehaviorSubject<RoomTransport[]>;
   destroyed$: Subject<void> = new Subject<void>();
+  storageUser: string = '';
+  user: UserTransport = {} as UserTransport;
 
   constructor(
     private userService: UserService,
@@ -24,12 +26,15 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.getUser()) {
-      this.getUserByUsername(this.getUser()).then((user) => {
-        console.log("fetched user id: ", user.id)
-        this.getUserRooms(user.id)
-      })
-    }
+    this.authenticationManagerService.storedUser$.subscribe((user) => {
+      if (user) {
+        this.storageUser = user;
+        this.getUserByUsername(this.storageUser).then((user) => {
+          this.user = user;
+          this.getUserRooms(user.id)
+        })
+      }
+    })
   }
 
   getUserRooms(userId: number) {
@@ -46,10 +51,6 @@ export class AppComponent implements OnInit {
 
   navigateToPage(id: number) {
     this.router.navigate(['rooms', id, 'messages']);
-  }
-
-  getUser() {
-    return this.authenticationManagerService.getUser();
   }
 
   getUserByUsername(username: string): Promise<UserTransport> {
