@@ -14,8 +14,8 @@ export class AuthenticationService extends DataService<UserTransport, UserListTr
     this.apiUrl = '';
   }
 
-  register(registerTransport: RegisterTransport): Observable<RegisterTransport> {
-    return this.httpClient.post<RegisterTransport>(`${this.url}/register`, registerTransport);
+  register(registerTransport: RegisterTransport): Observable<TokenTransport> {
+    return this.httpClient.post<TokenTransport>(`${this.url}/register`, registerTransport);
   }
 
   login(loginTransport: LoginTransport): Observable<TokenTransport> {
