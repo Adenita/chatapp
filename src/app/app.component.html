@@ -6,9 +6,9 @@
   <title>Chat App</title>
 </head>
 <body>
-<div class="container-fluid">
+<div class="container-fluid" >
   <div class="row full-height">
-    <div class="col-md-3 px-0">
+    <div class="col-md-3 px-0" *ngIf="storageUser">
       <div class="side-panel">
         <div class="header border-bottom ">
           <div class="row align-items-center">
@@ -43,7 +43,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-9 px-0">
+    <div class="px-0" [ngClass]="{'col-md-9':storageUser, 'col-md-12': !storageUser}">
       <div class="main-content">
           <router-outlet></router-outlet>
       </div>

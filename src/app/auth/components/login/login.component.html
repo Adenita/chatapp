@@ -1,0 +1,20 @@
+<h3 class="mb-5 dark-purple-text">Sign In</h3>
+
+<form [formGroup]="form">
+  <div class="form-outline mb-4">
+    <input type="text" id="username" formControlName="username" class="form-control form-control-lg" />
+    <label class="form-label" for="username" >Username</label>
+  </div>
+
+  <div class="form-outline mb-4">
+    <input type="password" id="password"  formControlName="password" class="form-control form-control-lg" />
+    <label class="form-label" for="password" >Password</label>
+  </div>
+</form>
+
+<button class="btn btn-lg btn-block purple-button" type="submit" (click)="login()">Login</button>
+
+<hr class="my-4">
+
+<p>Don't have an account? <span (click)="goToRegisterForm()" class="light-purple-text">Sing up!</span></p>
+
