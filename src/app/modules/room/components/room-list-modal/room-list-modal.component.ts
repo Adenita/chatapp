@@ -1,8 +1,8 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import {BehaviorSubject} from "rxjs";
-import {RoomTransport} from "../../shared/models/room";
-import {RoomService} from "../../core/services/http/room.service";
+import {RoomTransport} from "../../../../shared/models/room";
+import {RoomService} from "../../../../core/services/http/room.service";
 import {Router} from "@angular/router";
 
 @Component({
