@@ -97,8 +97,6 @@ export class SidePanelComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroyed$))
       .subscribe({
         next: (roomListTransport: RoomListTransport) => {
-          console.log("userId: ", userId)
-          console.log(roomListTransport)
           this.allChannels$.next(roomListTransport.roomTransports);
         },
         error: (err) => console.error('Error fetching rooms', err),
