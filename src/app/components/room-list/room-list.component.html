@@ -1,0 +1,8 @@
+<ul class="list-group">
+  <button *ngFor="let room of rooms$ | async"
+          class="list-group-item room-button"
+          (click)="doAction(room.id)"
+  >
+    {{ room.name }}
+  </button>
+</ul>
