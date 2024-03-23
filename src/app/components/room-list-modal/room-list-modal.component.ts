@@ -1,9 +1,8 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import {BehaviorSubject} from "rxjs";
 import {RoomTransport} from "../../shared/models/room";
 import {RoomService} from "../../core/services/http/room.service";
-import {FormGroup} from "@angular/forms";
 import {Router} from "@angular/router";
 
 @Component({
@@ -14,6 +13,9 @@ import {Router} from "@angular/router";
 export class RoomListModalComponent {
   @Input()
   rooms$!: BehaviorSubject<RoomTransport[]>;
+
+  @Output()
+  onJoinedEvent: EventEmitter<RoomTransport> = new EventEmitter<RoomTransport>();
 
   @Input()
   userId!: number;
@@ -28,14 +30,29 @@ export class RoomListModalComponent {
     this.activeModal.close();
   }
 
-  joinRoom(roomId: number, userId: number) {
-    this.roomService.joinRoom(roomId, userId).subscribe({
+  joinRoom(roomId: number) {
+    this.roomService.joinRoom(roomId, this.userId).subscribe({
        next: () => {
-         this.router.navigate(['rooms', roomId, 'messages'])
-         this.activeModal.close();
+         this.getRoom(roomId).then((roomTransport) => {
+           this.onJoinedEvent.emit(roomTransport)
+           this.router.navigate(['rooms', roomId, 'messages'])
+           this.activeModal.close();
+         })
+
        }
       }
     )
+  }
+
+  getRoom(roomId: number) {
+    return new Promise<RoomTransport>((resolve, reject) => {
+       this.roomService.get(roomId).subscribe({
+         next: (roomTransport: RoomTransport) => {
+           resolve(roomTransport)
+         },
+         error: () => reject()
+       })
+    })
   }
 
 }

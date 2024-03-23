@@ -3,12 +3,8 @@
   <button type="button" class="btn-close" (click)="closeModal()" aria-label="Close" style="color: white;"></button>
 </div>
 <div class="modal-body overflow-y-scroll">
-  <ul class="list-group">
-    <button *ngFor="let room of rooms$ | async"
-            class="list-group-item room-button"
-            (click)="joinRoom(room.id, userId)"
-            >
-      {{ room.name }}
-    </button>
-  </ul>
+<app-room-list
+  [rooms$]="rooms$"
+  (onClickEvent)="joinRoom($event)"
+></app-room-list>
 </div>

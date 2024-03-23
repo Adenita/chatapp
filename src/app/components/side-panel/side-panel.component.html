@@ -16,12 +16,10 @@
     <div class="channel-container flex-grow-1">
       <h4 class="section-heading text-white mt-3">Channels</h4>
       <ul class="list-group">
-        <button *ngFor="let room of channels$ | async"
-                class="list-group-item room-button"
-                (click)="navigateToPage(room.id)"
-        >
-          {{ room.name }}
-        </button>
+        <app-room-list
+          [rooms$]="channels$"
+          (onClickEvent)="navigateToPage($event)"
+        ></app-room-list>
       </ul>
     </div>
 
@@ -32,12 +30,10 @@
       </div>
 
       <ul class="list-group">
-        <button *ngFor="let room of users$ | async"
-                class="list-group-item room-button"
-                (click)="navigateToPage(room.id)"
-        >
-          {{ room.name }}
-        </button>
+        <app-room-list
+          [rooms$]="users$"
+          (onClickEvent)="navigateToPage($event)"
+        ></app-room-list>
       </ul>
     </div>
   </div>

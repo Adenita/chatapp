@@ -74,6 +74,9 @@ export class SidePanelComponent implements OnInit, OnDestroy {
     const modalRef: NgbModalRef = this.modalService.open(RoomListModalComponent);
     modalRef.componentInstance.rooms$ = this.allChannels$;
     modalRef.componentInstance.userId = this.user.id;
+    modalRef.componentInstance.onJoinedEvent.subscribe((room: RoomTransport) => {
+      this.channels$.next([...this.channels$.getValue(), room])
+    })
   }
 
   openCreateModal() {}
