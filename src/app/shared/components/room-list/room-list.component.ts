@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {BehaviorSubject} from "rxjs";
-import {RoomTransport} from "../../shared/models/room";
+import {RoomTransport} from "../../models/room";
 
 @Component({
   selector: 'app-room-list',
