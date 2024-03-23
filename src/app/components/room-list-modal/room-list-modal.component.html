@@ -1,0 +1,14 @@
+<div class="modal-header">
+  <h4 class="modal-title fw-semibold ">Join Channel</h4>
+  <button type="button" class="btn-close" (click)="closeModal()" aria-label="Close" style="color: white;"></button>
+</div>
+<div class="modal-body overflow-y-scroll">
+  <ul class="list-group">
+    <button *ngFor="let room of rooms$ | async"
+            class="list-group-item room-button"
+            (click)="joinRoom(room.id, userId)"
+            >
+      {{ room.name }}
+    </button>
+  </ul>
+</div>
