@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
 import {BehaviorSubject, Subject, takeUntil} from "rxjs";
 import {RoomListTransport, RoomTransport} from "../../shared/models/room";
 import {RoomService} from "../../core/services/http/room.service";
