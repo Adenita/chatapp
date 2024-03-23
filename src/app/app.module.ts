@@ -8,14 +8,12 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
 import { UserComponent } from './components/user/user.component';
-import { MessageComponent } from './components/message/message.component';
-import { RoomComponent } from './components/room/room.component';
-import { RoomListComponent } from './components/room-list/room-list.component';
+
 import { HomeComponent } from './pages/home/home.component';
-import { RoomListModalComponent } from './components/room-list-modal/room-list-modal.component';
 import {IsLoggedInGuard} from "./auth/services/is-logged-in-guard";
 import { SidePanelComponent } from './components/side-panel/side-panel.component';
 import {InterceptorService} from "./auth/services/interceptor.service";
+import {SharedModule} from "./shared/shared.module";
 
 
 const routes: Routes = [
@@ -29,10 +27,9 @@ const routes: Routes = [
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
   },
   {
-    path: 'rooms/:id/messages',
-    component: RoomComponent,
-    canActivate: [IsLoggedInGuard]
-  }
+    path: 'rooms',
+    loadChildren: () => import('./modules/room/room.module').then((m) => m.RoomModule),
+  },
 ]
 
 
@@ -40,11 +37,7 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     UserComponent,
-    MessageComponent,
-    RoomComponent,
-    RoomListComponent,
     HomeComponent,
-    RoomListModalComponent,
     SidePanelComponent,
   ],
   imports: [
@@ -55,6 +48,7 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
+    SharedModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }],
   bootstrap: [AppComponent]
