@@ -22,9 +22,10 @@ export class SidePanelComponent implements OnInit, OnDestroy {
   allChannels$: BehaviorSubject<RoomTransport[]>;
   destroyed$: Subject<void> = new Subject<void>();
 
+  loggedIn: boolean = false;
 
   @Output()
-  storedUser: EventEmitter<string> = new EventEmitter<string>();
+  onStoredUserEvent: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(
     private roomService: RoomService,
@@ -40,9 +41,10 @@ export class SidePanelComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.authenticationManagerService.storedUser$.subscribe((user) => {
-      if (user) {
-        this.storedUser.emit(user);
+      this.loggedIn = this.authenticationManagerService.isLoggedIn();
 
+      if (user) {
+        this.onStoredUserEvent.emit(user);
         this.getUserByUsername(user).then((user) => {
           this.user = user;
           this.getUserChannels(user.id);
@@ -131,7 +133,7 @@ export class SidePanelComponent implements OnInit, OnDestroy {
 
   logout() {
     this.user = {} as UserTransport;
-    this.storedUser.emit('');
+    this.onStoredUserEvent.emit('');
     this.authenticationManagerService.logout();
   }
 
