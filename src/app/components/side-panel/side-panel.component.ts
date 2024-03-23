@@ -3,7 +3,7 @@ import {BehaviorSubject, Subject, takeUntil} from "rxjs";
 import {RoomListTransport, RoomTransport} from "../../shared/models/room";
 import {RoomService} from "../../core/services/http/room.service";
 import {NgbModal, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
-import {RoomListModalComponent} from "../room-list-modal/room-list-modal.component";
+import {RoomListModalComponent} from "../../modules/room/components/room-list-modal/room-list-modal.component";
 import {UserTransport} from "../../shared/models/user";
 import {Router} from "@angular/router";
 import {AuthenticationManagerService} from "../../core/services/authentication-manager.service";
