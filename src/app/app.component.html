@@ -9,7 +9,7 @@
 <div class="container-fluid" >
   <div class="row full-height">
     <div class="col-md-3 px-0">
-      <app-side-panel (storedUser)="getStoredUser($event)"></app-side-panel>
+      <app-side-panel (onStoredUserEvent)="getStoredUser($event)"></app-side-panel>
     </div>
     <div class="px-0" [ngClass]="{'col-md-9':storedUser, 'col-md-12': !storedUser}">
       <div class="main-content">
