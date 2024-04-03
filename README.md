@@ -1,27 +1,29 @@
-# Chatapp
+# VioletVibe - Chatapp
+This project represents an Angular real time chat application. It allows user to communicate in real time directly or in group chats while offering
+a clean and easy to use user interface. The overall theme of this project is purple hence the name: VioletVibe. 
+This project also offers user authentication for secure access.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.0.0.
+## Features
+1. Users can communicate in real time
+2. Users can create, join and chat in different available chat rooms
+3. Simple and interactive user interface
+4. Security provided through user authentication
+5. Lazy loading modules
 
-## Development server
+## Getting started
+Please replace the occurrence of you `{your-local-ip}` in `SocketIOService`
+```
+  private readonly url: string = 'http://{your-local-ip}:8081';
+```
+with your local IP address in the source code. This is necessary for the socket communication.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Screenshots
+### LoginPage
+<p align="center"><img src="src/assets/LoginPage.png" alt="login"></p>
 
-## Code scaffolding
+### SignUpPage
+<p align="center"><img src="src/assets/SignUpPage.png" alt="signup"></p>
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Room Chat Page
+<p align="center"><img src="src/assets/RoomChatPage.png" alt="chat"></p>
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
