@@ -14,6 +14,7 @@ export interface LoginTransport {
 
 export interface TokenTransport {
   token: string;
+  refreshToken: string;
   username: string;
   role: Role;
 }
