@@ -1,0 +1,12 @@
+<div class="message" [ngClass]="{'sender': isSender}">
+  <div class="message-avatar text-center pt-1">
+    <i *ngIf="!isSender; else sender" class="bi-person"></i>
+    <ng-template #sender>
+      <i class="bi-person-fill"></i>
+    </ng-template>
+  </div>
+  <div class="message-container">
+    <div> <h6 class="fw-normal fst-italic">{{message.userTransport.name}} <span class="text-black-50">{{formatDate(message.date)}}  </span> </h6></div>
+    <div class="message-content">{{ message.content }}</div>
+  </div>
+</div>

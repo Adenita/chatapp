@@ -8,42 +8,10 @@
 <body>
 <div class="container-fluid" >
   <div class="row full-height">
-    <div class="col-md-3 px-0" *ngIf="storageUser">
-      <div class="side-panel">
-        <div class="header border-bottom ">
-          <div class="row align-items-center">
-            <div class="col pe-0">
-              <input type="text" class="form-control search-bar" placeholder="Search rooms...">
-            </div>
-            <div class="col-auto ">
-              <div><i class="bi bi-plus-circle-fill fs-2"></i></div>
-            </div>
-          </div>
-        </div>
-        <div class="list-container">
-          <h4 class="section-heading text-white mt-3">Channels</h4>
-          <ul class="list-group">
-            <button *ngFor="let room of rooms$ | async"
-                    class="list-group-item room-button"
-                    (click)="navigateToPage(room.id)"
-            >
-              {{ room.name }}
-            </button>
-          </ul>
-
-          <h4 class="section-heading text-white mt-3">Direct Messages</h4>
-          <ul class="list-group">
-            <button *ngFor="let room of rooms$ | async"
-                    class="list-group-item room-button"
-                    (click)="navigateToPage(room.id)"
-            >
-              {{ room.name }}
-            </button>
-          </ul>
-        </div>
-      </div>
+    <div class="col-md-3 px-0">
+      <app-side-panel (onStoredUserEvent)="getStoredUser($event)"></app-side-panel>
     </div>
-    <div class="px-0" [ngClass]="{'col-md-9':storageUser, 'col-md-12': !storageUser}">
+    <div class="px-0" [ngClass]="{'col-md-9':storedUser, 'col-md-12': !storedUser}">
       <div class="main-content">
           <router-outlet></router-outlet>
       </div>

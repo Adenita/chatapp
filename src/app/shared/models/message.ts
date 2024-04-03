@@ -6,6 +6,7 @@ export interface MessageTransport {
   content: string;
   userTransport: UserTransport;
   roomTransport: RoomTransport;
+  date: Date
 }
 
 export interface MessageListTransport {

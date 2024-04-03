@@ -21,4 +21,18 @@ export class UserService extends DataService<UserTransport, UserListTransport> {
   getUserRooms(userId: number): Observable<RoomListTransport> {
     return this.httpClient.get<RoomListTransport>(`${this.url}/${this.apiUrl}/${userId}/rooms`);
   }
+
+  getUserDMs(userId: number): Observable<RoomListTransport> {
+    return this.httpClient.get<RoomListTransport>(`${this.url}/${this.apiUrl}/${userId}/dms`);
+  }
+
+  getUserChannels(userId: number): Observable<RoomListTransport> {
+    return this.httpClient.get<RoomListTransport>(`${this.url}/${this.apiUrl}/${userId}/channels`);
+  }
+
+  getAvailableNonUserChannels(userId: number): Observable<RoomListTransport> {
+    return this.httpClient.get<RoomListTransport>(`${this.url}/${this.apiUrl}/${userId}/non`);
+  }
+
 }
+

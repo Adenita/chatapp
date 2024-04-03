@@ -1,4 +1,4 @@
-<div class="header border-bottom pb-4">
+<div class="header border-bottom py-4">
   <div class="row align-items-center">
     <div class="col-auto">
       <div class="room-avatar"></div>
@@ -15,7 +15,7 @@
 <div class="chat-container">
   <div class="messages-container">
     <div *ngFor="let message of messages$ | async  " class="message">
-      <app-message [content]="message.content" [isSender]="message.userTransport.id == userTransport.id"></app-message>
+      <app-message  [message]="message" [isSender]="message.userTransport.id == userTransport.id"></app-message>
     </div>
   </div>
 </div>

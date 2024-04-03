@@ -1,14 +1,14 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BehaviorSubject, map, Subject, takeUntil} from "rxjs";
-import {MessageListTransport, MessageTransport} from "../../shared/models/message";
-import {RoomService} from "../../core/services/http/room.service";
-import {UserService} from "../../core/services/http/user.service";
-import {UserTransport} from "../../shared/models/user";
-import {RoomTransport} from "../../shared/models/room";
-import {SocketIOService} from "../../core/services/socket-i-o.service";
-import {RouteParametersService} from "../../core/services/route-parameters.service";
+import {MessageListTransport, MessageTransport} from "../../../../shared/models/message";
+import {RoomService} from "../../../../core/services/http/room.service";
+import {UserService} from "../../../../core/services/http/user.service";
+import {UserTransport} from "../../../../shared/models/user";
+import {RoomTransport} from "../../../../shared/models/room";
+import {SocketIOService} from "../../../../core/services/socket-i-o.service";
+import {RouteParametersService} from "../../../../core/services/route-parameters.service";
 import {ActivatedRoute} from "@angular/router";
-import {AuthenticationManagerService} from "../../core/services/authentication-manager.service";
+import {AuthenticationManagerService} from "../../../../core/services/authentication-manager.service";
 
 @Component({
   selector: 'app-room',
@@ -42,7 +42,7 @@ export class RoomComponent implements OnInit, OnDestroy {
         this.getRoom(this.roomId)
         this.getRoomMessages(this.roomId)
 
-        const username = this.authenticationManagerService.getUser();
+        const username = this.authenticationManagerService.getUsername();
         this.getUserByUsername(username)
 
         this.socketIOService.connectToSocket(this.roomId + "")
@@ -92,10 +92,11 @@ export class RoomComponent implements OnInit, OnDestroy {
   }
 
   sendMessage() {
-    const messageTransport = {
+    const messageTransport: MessageTransport = {
       userTransport: this.userTransport,
       roomTransport: this.roomTransport,
-      content: this.messageInput
+      content: this.messageInput,
+      date: new Date()
     } as MessageTransport;
 
     this.socketIOService.sendMessage(messageTransport);

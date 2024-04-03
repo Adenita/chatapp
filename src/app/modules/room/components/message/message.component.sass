@@ -1,12 +1,16 @@
 $avatar-bg-color: #f0f0f0
 
 $message-border-radius: 25px
-$message-max-width: 70%
+$message-max-width: 60%
 
 .message
   display: flex
   align-items: flex-end
   margin-bottom: 15px
+
+  h6
+    margin-left: 0.5em
+    font-size: 0.8rem
 
   &-avatar
     width: 55px
@@ -15,12 +19,18 @@ $message-max-width: 70%
     background-color: $avatar-bg-color
     margin-right: 10px
 
+    .bi-person, .bi-person-fill
+      color: var(--light-dark-bg)
+      font-size: 2em
+
+  &-container
+    max-width: $message-max-width
+
   &-content
-    background-color: rgba(0, 0, 0, 0.14)
+    background-color: $avatar-bg-color
     color: var(--semi-dark-bg)
     padding: 13px 25px
     border-radius: $message-border-radius
-    max-width: $message-max-width
 
   &.sender
     flex-direction: row-reverse
