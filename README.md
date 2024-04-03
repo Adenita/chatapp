@@ -18,14 +18,12 @@ Please replace the occurrence of you `{your-local-ip}` in `SocketIOService`
 with your local IP address in the source code. This is necessary for the socket communication.
 
 ## Screenshots
-### Login and Signup page
-<p align="left"><img src="src/assets/LoginPage.png" alt="login"></p>
-<p align="right"><img src="src/assets/SignUpPage.png" alt="signup"></p>
+### LoginPage
+<p align="center"><img src="src/assets/LoginPage.png" alt="login"></p>
 
-### Room Chat page
+### SignUpPage
+<p align="center"><img src="src/assets/SignUpPage.png" alt="signup"></p>
+
+### Room Chat Page
 <p align="center"><img src="src/assets/RoomChatPage.png" alt="chat"></p>
-
-
-## Development server
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
