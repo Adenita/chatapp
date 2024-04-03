@@ -8,7 +8,7 @@ import {RoomTransport} from "../../../../shared/models/room";
 import {SocketIOService} from "../../../../core/services/socket-i-o.service";
 import {RouteParametersService} from "../../../../core/services/route-parameters.service";
 import {ActivatedRoute} from "@angular/router";
-import {AuthenticationManagerService} from "../../../../core/services/authentication-manager.service";
+import {StorageService} from "../../../../core/services/storage.service";
 
 @Component({
   selector: 'app-room',
@@ -30,7 +30,7 @@ export class RoomComponent implements OnInit, OnDestroy {
     private socketIOService: SocketIOService,
     private routeParametersService: RouteParametersService,
     private activatedRoute: ActivatedRoute,
-    private authenticationManagerService: AuthenticationManagerService
+    private storageService: StorageService
   ) {
     this.messages$ = new BehaviorSubject<MessageTransport[]>([]);
   }
@@ -42,7 +42,7 @@ export class RoomComponent implements OnInit, OnDestroy {
         this.getRoom(this.roomId)
         this.getRoomMessages(this.roomId)
 
-        const username = this.authenticationManagerService.getUsername();
+        const username = this.storageService.getUsername();
         this.getUserByUsername(username)
 
         this.socketIOService.connectToSocket(this.roomId + "")

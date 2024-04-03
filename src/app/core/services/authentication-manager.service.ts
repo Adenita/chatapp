@@ -4,6 +4,7 @@ import {AuthenticationService} from './http/authentication.service';
 import {FormGroup} from '@angular/forms';
 import {TokenTransport} from '../../shared/models/authentication';
 import {BehaviorSubject} from "rxjs";
+import {StorageService} from "./storage.service";
 
 @Injectable({
   providedIn: 'root',
@@ -14,6 +15,7 @@ export class AuthenticationManagerService {
   constructor(
     private router: Router,
     private authenticationService: AuthenticationService,
+    private storageService: StorageService
   ) {
     this.storedUser$ = new BehaviorSubject<string | null>(localStorage.getItem('user_id'))
   }
@@ -25,7 +27,7 @@ export class AuthenticationManagerService {
         .pipe()
         .subscribe({
           next: (tokenTransport: TokenTransport) => {
-            this.storeUserToLocalStorage(tokenTransport.username, tokenTransport.token)
+            this.storageService.storeUserAndTokensToStorage(tokenTransport.username, tokenTransport.token, tokenTransport.refreshToken)
             this.storedUser$.next(tokenTransport.username);
             this.router.navigate(['/'])
           },
@@ -40,37 +42,21 @@ export class AuthenticationManagerService {
         .pipe()
         .subscribe({
           next: (tokenTransport: TokenTransport) => {
-            console.log("registered transport: ", tokenTransport)
-            this.storeUserToLocalStorage(tokenTransport.username, tokenTransport.token)
+            this.storageService.storeUserAndTokensToStorage(tokenTransport.username, tokenTransport.token, tokenTransport.refreshToken)
             this.storedUser$.next(tokenTransport.username);
-            this.router.navigate(['/']).then(() => {
-            });
+            this.router.navigate(['/']).then(() => {});
           },
         });
     }
   }
 
   logout() {
-    localStorage.removeItem('user_token');
-    localStorage.removeItem('user_id');
+    this.storageService.removeUserAndTokenFromStorage();
     this.storedUser$.next(null);
     this.router.navigate(['login'])
   }
 
-  storeUserToLocalStorage(username: string, token: string) {
-    localStorage.setItem('user_id', username);
-    localStorage.setItem('user_token', token);
-  }
-
   isLoggedIn() {
-    return !!this.getToken();
-  }
-
-  getToken() {
-    return localStorage.getItem('user_token');
-  }
-
-  getUsername() {
-    return localStorage.getItem('user_id') ?? '';
+    return !!this.storageService.getAccessToken();
   }
 }
