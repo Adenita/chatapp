@@ -7,8 +7,8 @@ import {Component} from '@angular/core';
   styleUrls: ['./app.component.sass']
 })
 export class AppComponent {
-  storedUser: string = '';
-  getStoredUser(user: string) {
+  storedUser: string | null = null;
+  getStoredUser(user: string | null) {
     this.storedUser = user;
   }
 }
