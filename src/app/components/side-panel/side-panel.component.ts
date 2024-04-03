@@ -25,7 +25,7 @@ export class SidePanelComponent implements OnInit, OnDestroy {
   loggedIn: boolean = false;
 
   @Output()
-  onStoredUserEvent: EventEmitter<string> = new EventEmitter<string>();
+  onStoredUserEvent: EventEmitter<string | null> = new EventEmitter<string | null>();
 
   constructor(
     private roomService: RoomService,
@@ -42,9 +42,9 @@ export class SidePanelComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.authenticationManagerService.storedUser$.subscribe((user) => {
       this.loggedIn = this.authenticationManagerService.isLoggedIn();
+      this.onStoredUserEvent.emit(user);
 
       if (user) {
-        this.onStoredUserEvent.emit(user);
         this.getUserByUsername(user).then((user) => {
           this.user = user;
           this.getUserChannels(user.id);
