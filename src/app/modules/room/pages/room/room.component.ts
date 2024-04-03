@@ -92,10 +92,11 @@ export class RoomComponent implements OnInit, OnDestroy {
   }
 
   sendMessage() {
-    const messageTransport = {
+    const messageTransport: MessageTransport = {
       userTransport: this.userTransport,
       roomTransport: this.roomTransport,
-      content: this.messageInput
+      content: this.messageInput,
+      date: new Date()
     } as MessageTransport;
 
     this.socketIOService.sendMessage(messageTransport);
