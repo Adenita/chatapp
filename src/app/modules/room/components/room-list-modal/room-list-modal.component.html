@@ -3,8 +3,16 @@
   <button type="button" class="btn-close" (click)="closeModal()" aria-label="Close" style="color: white;"></button>
 </div>
 <div class="modal-body overflow-y-scroll">
-<app-room-list
-  [rooms$]="rooms$"
-  (onClickEvent)="joinRoom($event)"
-></app-room-list>
+  <ng-container *ngIf="rooms$ && rooms$.getValue() && rooms$.getValue().length > 0; else noRooms">
+    <app-room-list
+      [rooms$]="rooms$"
+      (onClickEvent)="joinRoom($event)"
+    ></app-room-list>
+  </ng-container>
+  <ng-template #noRooms>
+    <div class="text-center">
+      <p class="lead fst-italic fs-6 mb-0">No More Available Channels To Join :(</p>
+      <p class="lead fst-italic fs-6">You can always create a new one :)</p>
+    </div>
+  </ng-template>
 </div>
