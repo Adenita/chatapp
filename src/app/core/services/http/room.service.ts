@@ -22,4 +22,8 @@ export class RoomService extends DataService<RoomTransport, RoomListTransport> {
   getRoomUsers(roomId: number): Observable<UserListTransport> {
     return this.httpClient.get<UserListTransport>(`${this.url}/${this.apiUrl}/${roomId}/users`);
   }
+
+  joinRoom(roomId: number, userId: number): Observable<void> {
+    return this.httpClient.post<void>(`${this.url}/${this.apiUrl}/${roomId}/join?userId=${userId}`, {});
+  }
 }
