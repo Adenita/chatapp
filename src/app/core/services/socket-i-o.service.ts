@@ -21,13 +21,14 @@ export class SocketIOService {
   }
 
   sendMessage(message: MessageTransport) {
-    this.socket.emit('send_message', message);
+    this.socket.emit('send_message', JSON.stringify(message));
   }
 
   receiveMessages(roomId: number): Observable<any> {
     return new Observable(observer => {
       this.socket.on(`read_message`, (data: any) => {
-        observer.next(data);
+        const message = JSON.parse(data);
+        observer.next(message);
       });
     });
   }
