@@ -4,6 +4,7 @@ import {AuthenticationManagerService} from "../../../core/services/authenticatio
 import {Router} from "@angular/router";
 
 @Component({
+  standalone: false,
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.sass']

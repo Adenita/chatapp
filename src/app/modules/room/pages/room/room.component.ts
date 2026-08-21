@@ -11,6 +11,7 @@ import {ActivatedRoute} from "@angular/router";
 import {StorageService} from "../../../../core/services/storage.service";
 
 @Component({
+  standalone: false,
   selector: 'app-room',
   templateUrl: './room.component.html',
   styleUrls: ['./room.component.sass']
