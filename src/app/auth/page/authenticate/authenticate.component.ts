@@ -4,6 +4,7 @@ import {ActivatedRoute, ActivatedRouteSnapshot} from "@angular/router";
 import {Role} from "../../../shared/models/user";
 
 @Component({
+  standalone: false,
   selector: 'app-authenticate',
   templateUrl: './authenticate.component.html',
   styleUrls: ['./authenticate.component.sass']

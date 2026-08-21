@@ -7,7 +7,6 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
-import { UserComponent } from './components/user/user.component';
 
 import { HomeComponent } from './pages/home/home.component';
 import {IsLoggedInGuard} from "./auth/services/is-logged-in-guard";
@@ -36,7 +35,6 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    UserComponent,
     HomeComponent,
     SidePanelComponent,
   ],

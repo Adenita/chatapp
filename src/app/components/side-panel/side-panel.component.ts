@@ -10,6 +10,7 @@ import {AuthenticationManagerService} from "../../core/services/authentication-m
 import {UserService} from "../../core/services/http/user.service";
 
 @Component({
+  standalone: false,
   selector: 'app-side-panel',
   templateUrl: './side-panel.component.html',
   styleUrls: ['./side-panel.component.sass']

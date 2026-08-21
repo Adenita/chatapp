@@ -6,6 +6,7 @@ import {RoomService} from "../../../../core/services/http/room.service";
 import {Router} from "@angular/router";
 
 @Component({
+  standalone: false,
   selector: 'app-room-list-modal',
   templateUrl: './room-list-modal.component.html',
   styleUrls: ['./room-list-modal.component.sass']

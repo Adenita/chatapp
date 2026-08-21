@@ -3,6 +3,7 @@ import {MessageTransport} from "../../../../shared/models/message";
 import {DatePipe} from "@angular/common";
 
 @Component({
+  standalone: false,
   selector: 'app-message',
   templateUrl: './message.component.html',
   styleUrls: ['./message.component.sass']

@@ -3,6 +3,7 @@ import {BehaviorSubject} from "rxjs";
 import {RoomTransport} from "../../models/room";
 
 @Component({
+  standalone: false,
   selector: 'app-room-list',
   templateUrl: './room-list.component.html',
   styleUrls: ['./room-list.component.sass']
