@@ -69,10 +69,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "chatapp:build:production"
+              "buildTarget": "chatapp:build:production"
             },
             "development": {
-              "browserTarget": "chatapp:build:development"
+              "buildTarget": "chatapp:build:development"
             }
           },
           "defaultConfiguration": "development"
